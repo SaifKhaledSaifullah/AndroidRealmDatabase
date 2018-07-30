@@ -4,6 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.saif.hellorealm.model.SocialAccount;
+import com.saif.hellorealm.model.User;
+
+import java.util.UUID;
 
 import io.realm.Realm;
 import io.realm.RealmAsyncTask;
@@ -37,6 +43,45 @@ public class MainActivity extends AppCompatActivity {
     // Add data to Realm using Main UI Thread. Be Careful: As it may BLOCK the UI.
     public void addUserToRealm_Synchronously(View view) {
 
+        final String name = etPersonName.getText().toString();
+        final int age = Integer.valueOf(etAge.getText().toString());
+        final String socialAccountName = etSocialAccountName.getText().toString();
+        final String status = etStatus.getText().toString();
+        final String id = UUID.randomUUID().toString();
+
+        // insertData with a try catch block
+
+        /*
+        try {
+            myRealm.beginTransaction();
+            SocialAccount socialAccount = myRealm.createObject(SocialAccount.class);
+            socialAccount.setName(socialAccountName);
+            socialAccount.setStatus(status);
+            User user = myRealm.createObject(User.class, id);
+            user.setName(name);
+            user.setAge(age);
+            user.setSocialAccount(socialAccount);
+            myRealm.commitTransaction();
+        } catch (Exception e) {
+            myRealm.cancelTransaction();
+        }*/
+
+
+        // insert Data with executeTransaction Method
+        myRealm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                SocialAccount socialAccount = realm.createObject(SocialAccount.class);
+                socialAccount.setName(socialAccountName);
+                socialAccount.setStatus(status);
+
+                User user = realm.createObject(User.class, id);
+                user.setName(name);
+                user.setAge(age);
+                user.setSocialAccount(socialAccount);
+                Toast.makeText(MainActivity.this, "Data inserted Successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Add Data to Realm in the Background Thread.
