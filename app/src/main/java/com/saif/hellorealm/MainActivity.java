@@ -9,52 +9,56 @@ import io.realm.Realm;
 import io.realm.RealmAsyncTask;
 
 /**
- * 	Author: Saif Khaled Saifullah
- * */
+ * Author: Saif Khaled Saifullah
+ */
 public class MainActivity extends AppCompatActivity {
 
-	private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
-	private EditText etPersonName, etAge, etSocialAccountName, etStatus;
+    private EditText etPersonName, etAge, etSocialAccountName, etStatus;
 
-	private Realm myRealm;
-	private RealmAsyncTask realmAsyncTask;
+    private Realm myRealm;
+    private RealmAsyncTask realmAsyncTask;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-		etPersonName 		= (EditText) findViewById(R.id.etPersonName);
-		etAge 				= (EditText) findViewById(R.id.etAge);
-		etSocialAccountName = (EditText) findViewById(R.id.etSocialAccount);
-		etStatus 			= (EditText) findViewById(R.id.etStatus);
-		
-	}
+        etPersonName = (EditText) findViewById(R.id.etPersonName);
+        etAge = (EditText) findViewById(R.id.etAge);
+        etSocialAccountName = (EditText) findViewById(R.id.etSocialAccount);
+        etStatus = (EditText) findViewById(R.id.etStatus);
 
-	// Add data to Realm using Main UI Thread. Be Careful: As it may BLOCK the UI.
-	public void addUserToRealm_Synchronously(View view) {
+        // Realm instance
+        myRealm = Realm.getDefaultInstance();
+    }
 
-	}
+    // Add data to Realm using Main UI Thread. Be Careful: As it may BLOCK the UI.
+    public void addUserToRealm_Synchronously(View view) {
 
-	// Add Data to Realm in the Background Thread.
-	public void addUserToRealm_ASynchronously(View view) {
+    }
 
-	}
+    // Add Data to Realm in the Background Thread.
+    public void addUserToRealm_ASynchronously(View view) {
 
-	public void displayAllUsers(View view) {
+    }
 
-	}
+    //Show all Data From Realm Databse
+    public void displayAllUsers(View view) {
 
-	@Override
-	protected void onStop() {
-		super.onStop();
+    }
 
-	}
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+    @Override
+    protected void onStop() {
+        super.onStop();
 
-	}
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 }
